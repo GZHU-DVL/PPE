@@ -6,11 +6,11 @@
 
 | Method                      | Car  | Pedestrian | Van  | Cyslist | Mean |
 | --------------------------- | ---- | ---------- | ---- | ------- | ---- |
-| **success_$M^2$-track**     | 65.5 | 61.5       | 53.8 | 73.2    | 62.9 |
-| **success_ours**            | 67.9 | 63.9       | 53.2 | 76.0    | 65.0 |
+| **success_MM-Track**     | 65.5 | 61.5       | 53.8 | 73.2    | 62.9 |
+| **success_Ours**            | 67.9 | 63.9       | 53.2 | 76.0    | 65.0 |
 |                             |      |            |      |         |      |
-| **precision_$M^{2}$-track** | 80.8 | 88.2       | 70.7 | 93.5    | 83.4 |
-| **precision_ous**           | 81.0 | 90.0       | 69.8 | 94.0    | 84.2 |
+| **precision_MM-Track** | 80.8 | 88.2       | 70.7 | 93.5    | 83.4 |
+| **precision_Ous**           | 81.0 | 90.0       | 69.8 | 94.0    | 84.2 |
 
 
 
@@ -66,7 +66,7 @@
 ##### <span id='start'>Evaluating our pre-trained models</span>
 
 ```
-python main.py  --cfg kitti.yaml  --checkpoint ./pretrain/ppe_kitti_car.ckpt --test --preloading
+python main.py  --cfg cfg/kitti.yaml  --checkpoint ./pretrain/ppe_kitti_car.ckpt --test --preloading
 ```
 
 ##### The [kitti.yaml](https://github.com/GZHU-DVL/PPE/kitti.yaml) file contains all the configurations of the dataset and the model. We provide `.yaml files in the [*PPE*](https://github.com/GZHU-DVL/PPE) directory. 
@@ -78,7 +78,7 @@ python main.py  --cfg kitti.yaml  --checkpoint ./pretrain/ppe_kitti_car.ckpt --t
 ##### Training your models
 
 ```
-CUDA_VISIBLE_DEVICES=0,1 python main.py  --cfg kitti.yaml  --batch_size 32 --epoch 60 --preloading
+CUDA_VISIBLE_DEVICES=0,1 python main.py  --cfg cfg/kitti.yaml  --batch_size 64 --epoch 60 --preloading
 
 ```
 
@@ -87,7 +87,7 @@ CUDA_VISIBLE_DEVICES=0,1 python main.py  --cfg kitti.yaml  --batch_size 32 --epo
 ##### Testing your models
 
 ```
-python main.py  --cfg kitti.yaml  --checkpoint /path/to/checkpoint/xxx.ckpt --test
+python main.py  --cfg cfg/kitti.yaml  --checkpoint /path/to/checkpoint/xxx.ckpt --test --preloading
 ```
 
 
@@ -104,7 +104,7 @@ tensorboard --logdir=./
 
 ##### Our code is extended from the following repositories. We thank the authors for releasing the codes.
 
-- ##### [$ M^{2} $-Track](https://github.com/Ghostish/Open3DSOT)
+- ##### [MM-Track](https://github.com/Ghostish/Open3DSOT)
 
 - [Pointnet++](https://github.com/erikwijmans/Pointnet2_PyTorch)
 
