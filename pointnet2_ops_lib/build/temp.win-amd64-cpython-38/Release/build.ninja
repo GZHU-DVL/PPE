@@ -1,0 +1,33 @@
+ninja_required_version = 1.3
+cxx = cl
+nvcc = C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\bin\nvcc
+
+cflags = /nologo /O2 /W3 /GL /DNDEBUG /MD /MD /wd4819 /wd4251 /wd4244 /wd4267 /wd4275 /wd4018 /wd4190 /EHsc -ID:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\pointnet2_ops\_ext-src\include -IE:\anaconda\envs\open3d\lib\site-packages\torch\include -IE:\anaconda\envs\open3d\lib\site-packages\torch\include\torch\csrc\api\include -IE:\anaconda\envs\open3d\lib\site-packages\torch\include\TH -IE:\anaconda\envs\open3d\lib\site-packages\torch\include\THC "-IC:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include" -IE:\anaconda\envs\open3d\include -IE:\anaconda\envs\open3d\Include -IE:\vs\VC\Tools\MSVC\14.29.30133\ATLMFC\include -IE:\vs\VC\Tools\MSVC\14.29.30133\include "-IC:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" "-IE:\Windows Kits\10\include\10.0.19041.0\ucrt" "-IE:\Windows Kits\10\include\10.0.19041.0\shared" "-IE:\Windows Kits\10\include\10.0.19041.0\um" "-IE:\Windows Kits\10\include\10.0.19041.0\winrt" "-IE:\Windows Kits\10\include\10.0.19041.0\cppwinrt"
+post_cflags = -O3 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=_ext -D_GLIBCXX_USE_CXX11_ABI=0 /std:c++14
+cuda_cflags = --use-local-env -Xcompiler /MD -Xcompiler /wd4819 -Xcompiler /wd4251 -Xcompiler /wd4244 -Xcompiler /wd4267 -Xcompiler /wd4275 -Xcompiler /wd4018 -Xcompiler /wd4190 -Xcompiler /EHsc -Xcudafe --diag_suppress=base_class_has_different_dll_interface -Xcudafe --diag_suppress=field_without_dll_interface -Xcudafe --diag_suppress=dll_interface_conflict_none_assumed -Xcudafe --diag_suppress=dll_interface_conflict_dllexport_assumed -ID:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\pointnet2_ops\_ext-src\include -IE:\anaconda\envs\open3d\lib\site-packages\torch\include -IE:\anaconda\envs\open3d\lib\site-packages\torch\include\torch\csrc\api\include -IE:\anaconda\envs\open3d\lib\site-packages\torch\include\TH -IE:\anaconda\envs\open3d\lib\site-packages\torch\include\THC "-IC:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include" -IE:\anaconda\envs\open3d\include -IE:\anaconda\envs\open3d\Include -IE:\vs\VC\Tools\MSVC\14.29.30133\ATLMFC\include -IE:\vs\VC\Tools\MSVC\14.29.30133\include "-IC:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" "-IE:\Windows Kits\10\include\10.0.19041.0\ucrt" "-IE:\Windows Kits\10\include\10.0.19041.0\shared" "-IE:\Windows Kits\10\include\10.0.19041.0\um" "-IE:\Windows Kits\10\include\10.0.19041.0\winrt" "-IE:\Windows Kits\10\include\10.0.19041.0\cppwinrt"
+cuda_post_cflags = -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -O3 -Xfatbin -compress-all -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=_ext -D_GLIBCXX_USE_CXX11_ABI=0 -gencode=arch=compute_70,code=sm_70 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_75,code=sm_75 -gencode=arch=compute_61,code=sm_61 -gencode=arch=compute_37,code=compute_37 -gencode=arch=compute_37,code=sm_37 -gencode=arch=compute_60,code=sm_60 -gencode=arch=compute_62,code=sm_62
+ldflags = 
+
+rule compile
+  command = cl /showIncludes $cflags -c $in /Fo$out $post_cflags
+  deps = msvc
+
+rule cuda_compile
+  command = $nvcc $cuda_cflags -c $in -o $out $cuda_post_cflags
+
+
+
+build D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\build\temp.win-amd64-cpython-38\Release\pointnet2_ops\_ext-src\src\ball_query.obj: compile D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\pointnet2_ops\_ext-src\src\ball_query.cpp
+build D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\build\temp.win-amd64-cpython-38\Release\pointnet2_ops\_ext-src\src\ball_query_gpu.obj: cuda_compile D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\pointnet2_ops\_ext-src\src\ball_query_gpu.cu
+build D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\build\temp.win-amd64-cpython-38\Release\pointnet2_ops\_ext-src\src\bindings.obj: compile D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\pointnet2_ops\_ext-src\src\bindings.cpp
+build D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\build\temp.win-amd64-cpython-38\Release\pointnet2_ops\_ext-src\src\group_points.obj: compile D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\pointnet2_ops\_ext-src\src\group_points.cpp
+build D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\build\temp.win-amd64-cpython-38\Release\pointnet2_ops\_ext-src\src\group_points_gpu.obj: cuda_compile D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\pointnet2_ops\_ext-src\src\group_points_gpu.cu
+build D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\build\temp.win-amd64-cpython-38\Release\pointnet2_ops\_ext-src\src\interpolate.obj: compile D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\pointnet2_ops\_ext-src\src\interpolate.cpp
+build D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\build\temp.win-amd64-cpython-38\Release\pointnet2_ops\_ext-src\src\interpolate_gpu.obj: cuda_compile D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\pointnet2_ops\_ext-src\src\interpolate_gpu.cu
+build D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\build\temp.win-amd64-cpython-38\Release\pointnet2_ops\_ext-src\src\sampling.obj: compile D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\pointnet2_ops\_ext-src\src\sampling.cpp
+build D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\build\temp.win-amd64-cpython-38\Release\pointnet2_ops\_ext-src\src\sampling_gpu.obj: cuda_compile D$:\文档\Pointnet2_PyTorch-master\pointnet2_ops_lib\pointnet2_ops\_ext-src\src\sampling_gpu.cu
+
+
+
+
+
