@@ -104,7 +104,7 @@ tensorboard --logdir=./
 
 ##### Our code is extended from the following repositories. We thank the authors for releasing the codes.
 
-- ##### [$$M^{2}$$-Track](https://github.com/Ghostish/Open3DSOT)
+- ##### [$ M^{2} $-Track](https://github.com/Ghostish/Open3DSOT)
 
 - [Pointnet++](https://github.com/erikwijmans/Pointnet2_PyTorch)
 
