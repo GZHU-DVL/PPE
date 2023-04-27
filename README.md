@@ -77,7 +77,7 @@
 ##### <span id='start'>Evaluating our pre-trained models</span>
 
 ```
-python main.py  --cfg kitti.yaml  --checkpoint ./pretrain/ppe_kitti_car.ckpt --test --preloading
+python main.py  --cfg cfg/kitti.yaml  --checkpoint ./pretrain/ppe_kitti_car.ckpt --test --preloading
 ```
 
 ##### The [kitti.yaml](https://github.com/GZHU-DVL/PPE/kitti.yaml) file contains all the configurations of the dataset and the model. We provide `.yaml files in the cfg directory. 
